@@ -1,0 +1,381 @@
+<!-- 
+  RESPONSIVE IMAGE CAROUSEL
+  A lightweight, responsive image carousel with automatic sliding
+  and navigation controls. Built with vanilla JavaScript and CSS.
+  No dependencies required.
+-->
+<section style="position:relative; width:100%; padding:40px 20px; font-family:'Helvetica', sans-serif; box-sizing:border-box; overflow:hidden; background:transparent;">
+  <!-- Main container -->
+  <div class="tc-container">
+    <!-- Description text - customize as needed -->
+    <p class="tc-description">
+      Custom description text goes here. This area can be used to provide context about the images shown in the carousel below. The text automatically centers and has responsive sizing for different screen sizes.
+    </p>
+    
+    <!-- Carousel wrapper -->
+    <div class="tc-wrapper">
+      <!-- Navigation buttons -->
+      <button class="tc-btn tc-prev" aria-label="Previous slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button class="tc-btn tc-next" aria-label="Next slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+      
+      <!-- Carousel container -->
+      <div class="tc-gallery">
+        <!-- Left gradient overlay -->
+        <div class="tc-gradient-left"></div>
+        
+        <!-- Carousel track - all images go here -->
+        <div class="tc-track">
+          <!-- Image cards - add or remove as needed -->
+          <div class="tc-card">
+            <img src="path/to/image1.jpg" alt="Image 1 description" />
+          </div>
+          <div class="tc-card">
+            <img src="path/to/image2.jpg" alt="Image 2 description" />
+          </div>
+          <div class="tc-card">
+            <img src="path/to/image3.jpg" alt="Image 3 description" />
+          </div>
+          <div class="tc-card">
+            <img src="path/to/image4.jpg" alt="Image 4 description" />
+          </div>
+          <div class="tc-card">
+            <img src="path/to/image5.jpg" alt="Image 5 description" />
+          </div>
+          <div class="tc-card">
+            <img src="path/to/image6.jpg" alt="Image 6 description" />
+          </div>
+          <!-- Add more cards as needed -->
+        </div>
+        
+        <!-- Right gradient overlay -->
+        <div class="tc-gradient-right"></div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* 
+     * CAROUSEL STYLES
+     * Customize colors and dimensions as needed
+     */
+    
+    /* Main container styles */
+    .tc-container {
+      max-width: 1200px; /* Adjust width as needed */
+      margin: 0 auto; 
+      text-align: center; 
+      color: #333; /* Main text color */
+      position: relative;
+      box-sizing: border-box;
+    }
+    
+    /* Description text styles */
+    .tc-description {
+      font-size: 1.3em; 
+      line-height: 1.8em; 
+      max-width: 800px; /* Control text width */
+      margin: 0 auto 40px; 
+      color: #444; /* Description text color */
+    }
+    
+    /* Carousel wrapper */
+    .tc-wrapper {
+      position: relative;
+      padding: 20px 0;
+    }
+    
+    /* Carousel gallery container */
+    .tc-gallery {
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      max-width: 900px; /* Controls how many cards are visible */
+    }
+    
+    /* Track that holds all slide cards */
+    .tc-track {
+      display: flex;
+      transition: transform 0.5s ease; /* Controls slide animation speed */
+    }
+    
+    /* Individual card styling */
+    .tc-card {
+      min-width: 250px; /* Card width */
+      width: 250px;
+      margin: 0 10px; /* Space between cards */
+      border-radius: 12px; /* Rounded corners */
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Card shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
+      background-color: white;
+    }
+    
+    /* Hover effect for cards */
+    .tc-card:hover {
+      transform: scale(1.03); /* Slight enlargement on hover */
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+    }
+    
+    /* Image styling within cards */
+    .tc-card img {
+      width: 100%;
+      height: 150px; /* Fixed height for all images */
+      object-fit: cover; /* Ensures images fill the space nicely */
+      display: block;
+    }
+    
+    /* Left gradient overlay */
+    .tc-gradient-left {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100px;
+      height: 100%;
+      pointer-events: none;
+      background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+      z-index: 10;
+    }
+    
+    /* Right gradient overlay */
+    .tc-gradient-right {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100px;
+      height: 100%;
+      pointer-events: none;
+      background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+      z-index: 10;
+    }
+    
+    /* Navigation button styling */
+    .tc-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: white;
+      border: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5C258D; /* Button icon color - customize this */
+      transition: background-color 0.2s;
+    }
+    
+    /* Button hover effect */
+    .tc-btn:hover {
+      background-color: #f8f8f8;
+    }
+    
+    /* Position the previous button */
+    .tc-prev {
+      left: 10px;
+    }
+    
+    /* Position the next button */
+    .tc-next {
+      right: 10px;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .tc-gallery {
+        max-width: 300px; /* Show only one card on mobile */
+      }
+      
+      .tc-description {
+        font-size: 1.1em;
+        padding: 0 15px;
+      }
+      
+      .tc-btn {
+        width: 36px;
+        height: 36px;
+      }
+    }
+    
+    /* Fade-in animation */
+    @keyframes tcFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .tc-fade-in {
+      animation: tcFadeIn 0.5s forwards;
+    }
+  </style>
+
+  <script>
+    /**
+     * Responsive Image Carousel
+     * 
+     * Features:
+     * - Automatic sliding with configurable timing
+     * - Responsive design (3 images on desktop, 1 on mobile)
+     * - Navigation controls
+     * - Pause on hover
+     * - Smooth transitions
+     */
+    (function() {
+      // Only run this script once the DOM is fully loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get DOM elements
+        const track = document.querySelector('.tc-track');
+        const cards = Array.from(document.querySelectorAll('.tc-card'));
+        const prevButton = document.querySelector('.tc-prev');
+        const nextButton = document.querySelector('.tc-next');
+        
+        // Configuration options
+        const autoplaySpeed = 4000; // Time between slides in milliseconds
+        const transitionSpeed = 500; // Slide transition speed in milliseconds
+        
+        // Responsive settings
+        const cardsToShow = window.innerWidth < 768 ? 1 : 3;
+        const cardWidth = cards[0].offsetWidth + 20; // card width + margin
+        
+        // State variables
+        let currentIndex = 0;
+        let isTransitioning = false;
+        let autoplayInterval;
+        
+        /**
+         * Initialize the carousel
+         */
+        function initCarousel() {
+          // Set initial position
+          updateCarousel();
+          
+          // Start autoplay
+          startAutoplay();
+        }
+        
+        /**
+         * Update carousel position based on current index
+         */
+        function updateCarousel() {
+          // Calculate position
+          const position = -1 * currentIndex * cardWidth;
+          track.style.transform = `translateX(${position}px)`;
+          
+          // Prevent multiple clicks during transition
+          isTransitioning = true;
+          setTimeout(() => {
+            isTransitioning = false;
+          }, transitionSpeed);
+        }
+        
+        /**
+         * Go to a specific slide index
+         * @param {number} index - The slide index to navigate to
+         */
+        function goToSlide(index) {
+          if (isTransitioning) return;
+          
+          // Ensure index is within bounds
+          currentIndex = index;
+          if (currentIndex > cards.length - cardsToShow) {
+            currentIndex = cards.length - cardsToShow;
+          }
+          if (currentIndex < 0) {
+            currentIndex = 0;
+          }
+          
+          updateCarousel();
+          resetAutoplay();
+        }
+        
+        /**
+         * Navigate to the previous slide
+         */
+        function goToPrevSlide() {
+          if (isTransitioning) return;
+          goToSlide(currentIndex - 1);
+        }
+        
+        /**
+         * Navigate to the next slide
+         */
+        function goToNextSlide() {
+          if (isTransitioning) return;
+          
+          // Handle wrapping around to the first slide
+          if (currentIndex >= cards.length - cardsToShow) {
+            goToSlide(0);
+          } else {
+            goToSlide(currentIndex + 1);
+          }
+        }
+        
+        /**
+         * Start the autoplay interval
+         */
+        function startAutoplay() {
+          autoplayInterval = setInterval(goToNextSlide, autoplaySpeed);
+        }
+        
+        /**
+         * Reset the autoplay timer
+         */
+        function resetAutoplay() {
+          clearInterval(autoplayInterval);
+          startAutoplay();
+        }
+        
+        // Set up event listeners
+        
+        // Navigation button events
+        prevButton.addEventListener('click', goToPrevSlide);
+        nextButton.addEventListener('click', goToNextSlide);
+        
+        // Pause autoplay on hover
+        const carouselWrapper = document.querySelector('.tc-wrapper');
+        carouselWrapper.addEventListener('mouseenter', () => {
+          clearInterval(autoplayInterval);
+        });
+        
+        carouselWrapper.addEventListener('mouseleave', () => {
+          startAutoplay();
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+          const newCardsToShow = window.innerWidth < 768 ? 1 : 3;
+          
+          // Only update if the number of visible cards changed
+          if (newCardsToShow !== cardsToShow) {
+            // Temporarily disable transitions for repositioning
+            cards.forEach(card => {
+              card.style.transition = 'none';
+            });
+            
+            // Reset position after a brief delay
+            setTimeout(() => {
+              cards.forEach(card => {
+                card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+              });
+              goToSlide(0);
+            }, 50);
+          }
+        });
+        
+        // Initialize the carousel
+        initCarousel();
+      });
+    })();
+  </script>
+</section>
